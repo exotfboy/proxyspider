@@ -12,7 +12,7 @@ from lxml import etree
 from lxml import html
 from random import choice
 import threading
-import qiniuupload
+#import qiniuupload
 
 
 from config import (
@@ -58,7 +58,7 @@ class ProxySpider(object):
     """
     def out_proxy_queue(self):
         while self.fetch_finish == False or not self.proxy_queue.empty():
-            print "Begin to get proxy from queue"
+            print "Begin to get proxy from queue, left",self.proxy_queue.qsize()
             proxy = self.proxy_queue.get()
             check_proxy = self._fetch(TEST_URL, proxy)
             if check_proxy is not None and check_proxy.status_code == 200:
@@ -123,12 +123,13 @@ class ProxySpider(object):
     def run(self):       
         threads = []
         in_proxy_queue_thread = threading.Thread(target = self.in_proxy_queue)
-        out_proxy_queue_threads = [threading.Thread(target = self.out_proxy_queue) for i in range(100)]
+        out_proxy_queue_threads = [threading.Thread(target = self.out_proxy_queue) for i in range(50)]
         threads.append(in_proxy_queue_thread)
         threads.extend(out_proxy_queue_threads)
         [thread.start() for thread in threads]
         [thread.join() for thread in threads]
         """最终输出可用代理IP"""
+        print 'try persist'
         self.output_proxy()
 
 

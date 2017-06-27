@@ -10,5 +10,7 @@ Desktop.ini
 *.egg-info
 dist
 build
-
+/.idea
+*.pyc
 /ENV
+proxy_list.txt
