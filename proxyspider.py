@@ -110,7 +110,7 @@ class ProxySpider(object):
         if not proxy:
             return
         with self.lock:
-            self.good_proxy.add(proxy)     
+            self.good_proxy.add("http://"+proxy)
             
     """ 持久化可用代理IP """
     def output_proxy(self):

@@ -51,7 +51,7 @@ PROXY_SITES_BY_XPATH = [
 ]
 
 # 代理输出位置
-OUTPUT_FILE = "~/proxy.txt"
+OUTPUT_FILE = "/tmp/proxy.txt"
 
 
 # User-Agent list
